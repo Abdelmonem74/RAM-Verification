@@ -5,18 +5,21 @@ mailbox #(transaction)  seq_mb;
     function new();
         t = new();
     endfunction
+
     task create_transaction(
         input logic [DATA_WIDTH-1:0]  d_in,
         input logic                   enable,
         input logic [ADDR_WIDTH-1:0]  addr,
         input bit                     rstn);
+
         seq_mb.put(t);
+        //$display("put reset = %0b, din = %0d, at time = %0t",t.rstn,t.data_in,$time);
         t.data_in  = d_in;
         t.en       = enable;
         t.address  = addr;
         t.rstn     = rstn;
-        $display("put reset = %0b, at time = %0t",t.rstn,$time);
         
+
     endtask
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////  struct for direct tests   ////////////////////////////////////////
@@ -56,7 +59,8 @@ task transactions();
 
         
         for (int i = 0; i < n_rand_tests; i++) begin
-            create_transaction($urandom, $urandom, $urandom, 1'b1);
+            seq_mb.put(t);
+            void'(t.randomize());
         end
     endtask
 endclass

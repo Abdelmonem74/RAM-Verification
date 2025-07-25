@@ -12,6 +12,7 @@ virtual intf class_vif;
         
         @(posedge class_vif.clk);
         drv_mb.get(t_driver);
+
         class_vif.data_in   <= t_driver.data_in;
         class_vif.en        <= t_driver.en;
         class_vif.address   <= t_driver.address;

@@ -23,8 +23,8 @@ class env;
 
         mntr.mntr_mb1 = new(1);
         mntr.mntr_mb2 = new(1);
-        scr_brd.scr_brd_mb = mntr.mntr_mb1;
-        sbscrb.sbscrb_mb = mntr.mntr_mb2;
+        scr_brd.scr_brd_mb = mntr.mntr_mb2;
+        sbscrb.sbscrb_mb = mntr.mntr_mb1;
     endfunction
 
 
@@ -46,7 +46,7 @@ class env;
             mntr.mon();
         end
         begin
-            sbscrb.print();
+            sbscrb.coverage();
         end
         begin
             scr_brd.check();
